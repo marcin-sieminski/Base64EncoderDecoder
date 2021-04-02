@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Base64EncoderDecoder.Core
+namespace Base64EncoderDecoderCore
 {
     public static class Base64EncoderDecoder
     {
@@ -27,8 +27,16 @@ namespace Base64EncoderDecoder.Core
 
         public static string ConvertTextFromBase64(string encodedText)
         {
-            var textBytes = Convert.FromBase64String(encodedText);
-            return Encoding.Default.GetString(textBytes);
+            byte[] outputBytes;
+            try
+            {
+                outputBytes = Convert.FromBase64String(encodedText);
+            }
+            catch (FormatException)
+            {
+                return "Invalid input - the length of the input is not a multiple of 4.";
+            }
+            return Encoding.Default.GetString(outputBytes);
         }
     }
 }
