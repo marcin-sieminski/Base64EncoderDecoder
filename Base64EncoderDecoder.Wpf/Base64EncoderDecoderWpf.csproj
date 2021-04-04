@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Base64EncoderDecoder.Core\Base64EncoderDecoderCore.csproj" />
   </ItemGroup>
 

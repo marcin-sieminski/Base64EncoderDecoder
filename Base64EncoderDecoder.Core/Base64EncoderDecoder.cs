@@ -34,7 +34,7 @@ namespace Base64EncoderDecoderCore
             }
             catch (FormatException)
             {
-                return "Invalid input - the length of the input is not a multiple of 4.";
+                return "Invalid input: the length of the input is not a multiple of 4.";
             }
             return Encoding.Default.GetString(outputBytes);
         }
