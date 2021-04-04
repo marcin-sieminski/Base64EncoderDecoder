@@ -4,51 +4,51 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                  xmlns:local="clr-namespace:Base64EncoderDecoder.Wpf"
                   mc:Ignorable="d"
                   Title="Base64 Encoder Decoder" Height="500" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"
-                  FocusManager.FocusedElement="{Binding ElementName=inputTextBox}"
+                  FocusManager.FocusedElement="{Binding ElementName=InputTextBox}"
                   WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Margin="10">
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Margin="10" HorizontalAlignment="Left">
-                <TextBlock>Input:</TextBlock>
+        <StackPanel Orientation="Vertical" Margin="10">
+
+            <StackPanel>
+                <Label Content="Input" HorizontalAlignment="Left"></Label>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
-                <TextBox x:Name="inputTextBox" Height="100" TextWrapping="Wrap" KeyDown="enter_KeyDown"></TextBox>
+            <StackPanel>
+                <TextBox x:Name="InputTextBox" MinHeight="100" TextWrapping="Wrap" KeyDown="enter_KeyDown"></TextBox>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch">
-                <Button x:Name="encode" VerticalAlignment="Stretch" MinHeight="50" Margin="0 5 0 0" Click="encode_Click_1">Encode</Button>
-                <Button x:Name="decode" VerticalAlignment="Stretch" MinHeight="50" Margin="0 5 0 0" Click="decode_Click">Decode</Button>
+            <StackPanel Orientation="Vertical" Margin="0 10 0 10">
+                <Button x:Name="Encode" Content="Encode" MinHeight="50" Margin="0 5 0 0" Click="encode_Click_1"></Button>
+                <Button x:Name="Decode" Content="Decode" MinHeight="50" Margin="0 5 0 0" Click="decode_Click"></Button>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="3" Margin="10" HorizontalAlignment="Left">
-                <TextBlock>Output:</TextBlock>
+            <StackPanel>
+                <Label Content="Output" HorizontalAlignment="Left"></Label>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="4">
-                <TextBox Name="outputTextBox" Height="100" TextWrapping="Wrap" IsEnabled="False"></TextBox>
+            <StackPanel>
+                <TextBox Name="OutputTextBox" Height="100" TextWrapping="Wrap" IsEnabled="False"></TextBox>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom" Margin="0 10 0 0">
-                <Button Margin="0 5 0 0" VerticalAlignment="Stretch" MinHeight="50" Click="Button_Click">Clear</Button>
+            <StackPanel Margin="0 10 0 0">
+                <Button Content="Clear" MinHeight="50" Click="Button_Click"></Button>
             </StackPanel>
+
         </StackPanel>
 
     </Grid>
