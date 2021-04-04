@@ -1,8 +1,9 @@
 ﻿using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Input;
+using Base64EncoderDecoderWpf.ViewModels;
 
-namespace Base64EncoderDecoderWpf
+namespace Base64EncoderDecoderWpf.Views
 {
     public partial class MainWindow : MetroWindow
     {
@@ -15,7 +16,7 @@ namespace Base64EncoderDecoderWpf
         {
             if (InputTextBox.Text.Length >= 1)
             {
-                var processedText = new ProcessedTextModel {InputText = InputTextBox.Text};
+                var processedText = new ProcessedTextViewModel {InputText = InputTextBox.Text};
                 processedText.OutputText =
                     Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextToBase64(processedText.InputText);
                 OutputTextBox.Text = processedText.OutputText;
@@ -26,7 +27,7 @@ namespace Base64EncoderDecoderWpf
         {
             if (InputTextBox.Text.Length >= 1)
             {
-                var processedText = new ProcessedTextModel {InputText = InputTextBox.Text};
+                var processedText = new ProcessedTextViewModel {InputText = InputTextBox.Text};
                 processedText.OutputText =
                     Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextFromBase64(processedText.InputText);
                 if (processedText.OutputText == "")
