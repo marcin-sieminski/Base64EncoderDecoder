@@ -7,7 +7,8 @@
                   xmlns:local="clr-namespace:Base64EncoderDecoder.Wpf"
                   mc:Ignorable="d"
                   Title="Base64 Encoder Decoder" Height="500" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"
-                  FocusManager.FocusedElement="{Binding ElementName=inputTextBox}">
+                  FocusManager.FocusedElement="{Binding ElementName=inputTextBox}"
+                  WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
