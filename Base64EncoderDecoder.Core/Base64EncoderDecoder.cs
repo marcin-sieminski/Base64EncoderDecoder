@@ -19,6 +19,7 @@ namespace Base64EncoderDecoderCore
             var fileBytes = Convert.FromBase64String(base64String);
             File.WriteAllBytes(decodedFileName, fileBytes);
         }
+
         public static string ConvertTextToBase64(string inputText)
         {
             var originalBytes = Encoding.Default.GetBytes(inputText);
@@ -27,15 +28,7 @@ namespace Base64EncoderDecoderCore
 
         public static string ConvertTextFromBase64(string encodedText)
         {
-            byte[] outputBytes;
-            try
-            {
-                outputBytes = Convert.FromBase64String(encodedText);
-            }
-            catch (FormatException)
-            {
-                return "Invalid input: the length of the input is not a multiple of 4.";
-            }
+            var outputBytes = Convert.FromBase64String(encodedText);
             return Encoding.Default.GetString(outputBytes);
         }
     }

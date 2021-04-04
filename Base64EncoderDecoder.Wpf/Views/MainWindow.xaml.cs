@@ -1,56 +1,62 @@
-﻿using MahApps.Metro.Controls;
+﻿using Base64EncoderDecoderWpf.ViewModels;
 using System.Windows;
 using System.Windows.Input;
-using Base64EncoderDecoderWpf.ViewModels;
 
 namespace Base64EncoderDecoderWpf.Views
 {
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow
     {
+        public ProcessedTextViewModel ProcessedTextViewModel { get; set; } = new();
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = ProcessedTextViewModel;
         }
 
-        private void encode_Click_1(object sender, RoutedEventArgs e)
+        private void Encode_Click(object sender, RoutedEventArgs e)
         {
-            if (InputTextBox.Text.Length >= 1)
-            {
-                var processedText = new ProcessedTextViewModel {InputText = InputTextBox.Text};
-                processedText.OutputText =
-                    Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextToBase64(processedText.InputText);
-                OutputTextBox.Text = processedText.OutputText;
-            }
+            if (IsInvalidInputLength()) return;
+            InputError.Content = string.Empty;
+            ProcessedTextViewModel.InputText = InputTextBox.Text;
+            ProcessedTextViewModel.OutputText = Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextToBase64(ProcessedTextViewModel.InputText);
+            OutputTextBox.Text = ProcessedTextViewModel.OutputText;
         }
 
-        private void decode_Click(object sender, RoutedEventArgs e)
+        private void Decode_Click(object sender, RoutedEventArgs e)
         {
-            if (InputTextBox.Text.Length >= 1)
+            if (IsInvalidInputLength()) return;
+            if (InputTextBox.Text.Length % 4 != 0)
             {
-                var processedText = new ProcessedTextViewModel {InputText = InputTextBox.Text};
-                processedText.OutputText =
-                    Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextFromBase64(processedText.InputText);
-                if (processedText.OutputText == "")
-                {
-                    OutputTextBox.Text = "Invalid input - the length of the input is not a multiple of 4.";
-                }
-
-                OutputTextBox.Text = processedText.OutputText;
+                InputError.Content = "The input's length must be a multiple of 4";
+                return;
             }
+            InputError.Content = string.Empty;
+            ProcessedTextViewModel.InputText = InputTextBox.Text;
+            ProcessedTextViewModel.OutputText = Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextFromBase64(ProcessedTextViewModel.InputText);
+            OutputTextBox.Text = ProcessedTextViewModel.OutputText ?? string.Empty;
+        }
+
+        private bool IsInvalidInputLength()
+        {
+            if (InputTextBox.Text.Length >= 1) return false;
+            InputError.Content = "The input must contain at least 1 character";
+            return true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            InputTextBox.Text = "";
-            OutputTextBox.Text = "";
+            InputTextBox.Text = string.Empty;
+            OutputTextBox.Text = string.Empty;
+            InputError.Content = string.Empty;
         }
 
-        private void enter_KeyDown(object sender, KeyEventArgs e)
+        private void Enter_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Enter:
-                    encode_Click_1(sender, e);
+                    Encode_Click(sender, e);
                     break;
                 case Key.Escape:
                     Button_Click(sender, e);
