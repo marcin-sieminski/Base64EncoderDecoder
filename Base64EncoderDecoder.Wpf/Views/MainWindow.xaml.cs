@@ -51,13 +51,23 @@ namespace Base64EncoderDecoderWpf.Views
             InputError.Content = string.Empty;
         }
 
-        private void Enter_KeyDown(object sender, KeyEventArgs e)
+        private void InputTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Enter:
                     Encode_Click(sender, e);
                     break;
+                case Key.Escape:
+                    Button_Click(sender, e);
+                    break;
+            }
+        }
+
+        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
                 case Key.Escape:
                     Button_Click(sender, e);
                     break;
