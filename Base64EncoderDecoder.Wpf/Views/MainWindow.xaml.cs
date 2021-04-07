@@ -14,7 +14,7 @@ namespace Base64EncoderDecoderWpf.Views
             DataContext = ProcessedTextViewModel;
         }
 
-        private void Encode_Click(object sender, RoutedEventArgs e)
+        private void EncodeButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsInvalidInputLength()) return;
             InputError.Content = string.Empty;
@@ -23,7 +23,7 @@ namespace Base64EncoderDecoderWpf.Views
             OutputTextBox.Text = ProcessedTextViewModel.OutputText;
         }
 
-        private void Decode_Click(object sender, RoutedEventArgs e)
+        private void DecodeButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsInvalidInputLength()) return;
             if (InputTextBox.Text.Length % 4 != 0)
@@ -40,11 +40,11 @@ namespace Base64EncoderDecoderWpf.Views
         private bool IsInvalidInputLength()
         {
             if (InputTextBox.Text.Length >= 1) return false;
-            InputError.Content = "The input must contain at least 1 character";
+            InputError.Content = "The input is empty";
             return true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             InputTextBox.Text = string.Empty;
             OutputTextBox.Text = string.Empty;
@@ -56,20 +56,23 @@ namespace Base64EncoderDecoderWpf.Views
             switch (e.Key)
             {
                 case Key.Enter:
-                    Encode_Click(sender, e);
+                    EncodeButton_Click(sender, e);
                     break;
                 case Key.Escape:
-                    Button_Click(sender, e);
+                    ClearButton_Click(sender, e);
+                    break;
+                case Key.LeftShift & Key.Enter | Key.RightShift & Key.Enter:
+                    DecodeButton_Click(sender, e);
                     break;
             }
         }
 
-        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Escape:
-                    Button_Click(sender, e);
+                    ClearButton_Click(sender, e);
                     break;
             }
         }
