@@ -76,5 +76,10 @@ namespace Base64EncoderDecoderWpf.Views
                     break;
             }
         }
+
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(OutputTextBox.Text);
+        }
     }
 }
