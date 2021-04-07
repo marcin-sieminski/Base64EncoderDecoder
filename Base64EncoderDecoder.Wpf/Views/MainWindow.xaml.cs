@@ -58,11 +58,11 @@ namespace Base64EncoderDecoderWpf.Views
                 case Key.Enter:
                     EncodeButton_Click(sender, e);
                     break;
+                case Key.F12:
+                    DecodeButton_Click(sender, e);
+                    break;
                 case Key.Escape:
                     ClearButton_Click(sender, e);
-                    break;
-                case Key.LeftShift & Key.Enter | Key.RightShift & Key.Enter:
-                    DecodeButton_Click(sender, e);
                     break;
             }
         }
