@@ -1,4 +1,5 @@
 ﻿using Base64EncoderDecoderWpf.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -33,7 +34,14 @@ namespace Base64EncoderDecoderWpf.Views
             }
             InputError.Content = string.Empty;
             ProcessedTextViewModel.InputText = InputTextBox.Text;
-            ProcessedTextViewModel.OutputText = Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextFromBase64(ProcessedTextViewModel.InputText);
+            try
+            {
+                ProcessedTextViewModel.OutputText = Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextFromBase64(ProcessedTextViewModel.InputText);
+            }
+            catch (Exception exception)
+            {
+                InputError.Content = exception.Message;
+            }
             OutputTextBox.Text = ProcessedTextViewModel.OutputText ?? string.Empty;
         }
 

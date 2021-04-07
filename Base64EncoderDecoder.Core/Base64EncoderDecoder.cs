@@ -28,7 +28,11 @@ namespace Base64EncoderDecoderCore
 
         public static string ConvertTextFromBase64(string encodedText)
         {
-            var outputBytes = Convert.FromBase64String(encodedText);
+            var outputBytes = new Span<byte>();
+            if (!Convert.TryFromBase64String(encodedText, outputBytes, out int bytesWritten))
+            {
+                throw new Exception("Invalid input");
+            }
             return Encoding.Default.GetString(outputBytes);
         }
     }
