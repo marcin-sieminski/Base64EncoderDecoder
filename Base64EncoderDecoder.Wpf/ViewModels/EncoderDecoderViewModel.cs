@@ -31,7 +31,8 @@ namespace Base64EncoderDecoderWpf.ViewModels
             }
             set
             {
-               // _model.OutputEncoded = value;
+                _model.OutputEncoded = value;
+                OnPropertyChanged(nameof(OutputEncoded));
             }
         }
 
@@ -43,7 +44,8 @@ namespace Base64EncoderDecoderWpf.ViewModels
             }
             set
             {
-                //_model.OutputDecoded = value;
+                _model.OutputDecoded = value;
+                OnPropertyChanged(nameof(OutputDecoded));
             }
         }
 

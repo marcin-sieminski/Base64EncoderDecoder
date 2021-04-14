@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Stretch">
+        <StackPanel Orientation="Vertical" Margin="10">
             
             <StackPanel>
                 <Label Content="Input" HorizontalAlignment="Left"></Label>
@@ -34,7 +34,7 @@
 
             <StackPanel>
                 <TextBox x:Name="InputTextBox" MinHeight="100" TextWrapping="Wrap" KeyDown="InputTextBox_KeyDown" 
-                         Text="{Binding Path=InputText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                         Text="{Binding Path=InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
             <StackPanel MinHeight="30">
@@ -59,17 +59,17 @@
 
                 <Label Grid.Column="0" Grid.Row="0" Content="Encoded output" HorizontalAlignment="Left"></Label>
                 <Label Grid.Column="1" Grid.Row="0" Content="Decoded output" HorizontalAlignment="Left"></Label>
-                <TextBox Grid.Column="0" Grid.Row="1" MinHeight="150" TextWrapping="Wrap" IsEnabled="False" Margin="0 0 5 0" VerticalAlignment="Stretch"
-                         Text="{Binding Path=OutputEncoded, Mode=OneWay}"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="1" Name="OutputDecoded" MinHeight="150" TextWrapping="Wrap" IsEnabled="False" Margin="5 0 0 0" VerticalAlignment="Stretch"
-                         Text="{Binding Path=OutputDecoded, Mode=OneWay}"></TextBox>
+                <TextBox Grid.Column="0" Grid.Row="1" MinHeight="150" TextWrapping="Wrap" IsEnabled="False" Margin="0 0 5 0"
+                         Text="{Binding Path=OutputEncoded}"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="OutputDecoded" MinHeight="150" TextWrapping="Wrap" IsEnabled="False" Margin="5 0 0 0"
+                         Text="{Binding Path=InputText}"></TextBox>
                 <Button Grid.Column="0" Grid.Row="2" Content="Copy encoded" MinHeight="50" Margin="0 5 5 5" Click="CopyButton_Click"></Button>
                 <Button Grid.Column="1" Grid.Row="2" Content="Copy decoded" MinHeight="50" Margin="5 5 0 5" Click="CopyButton_Click"></Button>
             </Grid>
 
         </StackPanel>
 
-        <Button Grid.Row="1" Content="Clear" MinHeight="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
+        <Button Grid.Row="1" Content="Clear" MinHeight="50" Margin="10"
                 Command="{Binding Clear}"></Button>
 
     </Grid>
