@@ -6,9 +6,9 @@ using System.Windows.Input;
 
 namespace Base64EncoderDecoderWpf.ViewModels
 {
-    public class ProcessedTextViewModel : INotifyPropertyChanged
+    public class EncoderDecoderViewModel : INotifyPropertyChanged
     {
-        private ProcessedTextModel _model = new ProcessedTextModel();
+        private EncoderDecoderModel _model = new EncoderDecoderModel();
 
         public string InputText
         {
@@ -16,18 +16,34 @@ namespace Base64EncoderDecoderWpf.ViewModels
             set
             {
                 _model.InputText = value;
-                _model.OutputText = Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextToBase64(_model.InputText);
+                _model.OutputEncoded = Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextToBase64(_model.InputText);
+                _model.OutputDecoded =
+                    Base64EncoderDecoderCore.Base64EncoderDecoder.ConvertTextFromBase64(_model.InputText);
                 OnPropertyChanged(nameof(InputText));
             }
         }
 
-        public string OutputText
+        public string OutputEncoded
         {
-            get => _model.OutputText;
+            get
+            {
+                return _model.OutputEncoded;
+            }
             set
             {
-                _model.OutputText = value;
-                OnPropertyChanged(nameof(OutputText));
+               // _model.OutputEncoded = value;
+            }
+        }
+
+        public string OutputDecoded
+        {
+            get
+            {
+                return _model.OutputDecoded;
+            }
+            set
+            {
+                //_model.OutputDecoded = value;
             }
         }
 
@@ -55,7 +71,7 @@ namespace Base64EncoderDecoderWpf.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

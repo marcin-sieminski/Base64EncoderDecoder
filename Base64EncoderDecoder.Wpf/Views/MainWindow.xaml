@@ -5,68 +5,72 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   mc:Ignorable="d"
-                  Title="Base64 Encoder Decoder" Height="600" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Title="Base64 Encoder Decoder" Height="640" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"
                   FocusManager.FocusedElement="{Binding ElementName=InputTextBox}"
                   WindowStartupLocation="CenterScreen"
                   KeyDown="MainWindow_KeyDown"
-                  xmlns:model="clr-namespace:Base64EncoderDecoderWpf.Model">
+                  xmlns:model="clr-namespace:Base64EncoderDecoderWpf.ViewModels"
+                  >
 
     <Window.DataContext>
-        <model:ProcessedTextModel/>
+        <model:EncoderDecoderViewModel/>
     </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Margin="10">
-
+        <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Stretch">
+            
             <StackPanel>
                 <Label Content="Input" HorizontalAlignment="Left"></Label>
             </StackPanel>
 
             <StackPanel>
                 <TextBox x:Name="InputTextBox" MinHeight="100" TextWrapping="Wrap" KeyDown="InputTextBox_KeyDown" 
-                         Text="{Binding Path=InputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                         Text="{Binding Path=InputText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
             <StackPanel MinHeight="30">
                 <Label Name="InputError" Foreground="Red"></Label>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="0 0 0 10">
-                <Button x:Name="Encode" Content="Encode" MinHeight="50" Margin="0 5 0 0" Click="EncodeButton_Click"></Button>
-                <Button x:Name="Decode" Content="Decode" MinHeight="50" Margin="0 5 0 0" Click="DecodeButton_Click"></Button>
-            </StackPanel>
+            <!--<StackPanel Orientation="Vertical" Margin="0 0 0 10">
+                <Button Content="Encode" MinHeight="50" Margin="0 5 0 0" Click="EncodeButton_Click"></Button>
+                <Button Content="Decode" MinHeight="50" Margin="0 5 0 0" Click="DecodeButton_Click"></Button>
+            </StackPanel>-->
 
-            <StackPanel>
-                <Label Content="Output" HorizontalAlignment="Left"></Label>
-            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel>
-                <TextBox Name="OutputTextBox" Height="100" TextWrapping="Wrap" IsEnabled="False"
-                         Text="{Binding Path=OutputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <Button Name="Copy" Content="Copy to clipboard" MinHeight="50" Margin="0 5 0 5" Click="CopyButton_Click"></Button>
-            </StackPanel>
-
-            <StackPanel Margin="0 10 0 0">
-                <Button Content="Clear" MinHeight="50" HorizontalAlignment="Stretch" 
-                        Command="{Binding Path=Clear}"
-                        ></Button>
-            </StackPanel>
+                <Label Grid.Column="0" Grid.Row="0" Content="Encoded output" HorizontalAlignment="Left"></Label>
+                <Label Grid.Column="1" Grid.Row="0" Content="Decoded output" HorizontalAlignment="Left"></Label>
+                <TextBox Grid.Column="0" Grid.Row="1" MinHeight="150" TextWrapping="Wrap" IsEnabled="False" Margin="0 0 5 0" VerticalAlignment="Stretch"
+                         Text="{Binding Path=OutputEncoded, Mode=OneWay}"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="OutputDecoded" MinHeight="150" TextWrapping="Wrap" IsEnabled="False" Margin="5 0 0 0" VerticalAlignment="Stretch"
+                         Text="{Binding Path=OutputDecoded, Mode=OneWay}"></TextBox>
+                <Button Grid.Column="0" Grid.Row="2" Content="Copy encoded" MinHeight="50" Margin="0 5 5 5" Click="CopyButton_Click"></Button>
+                <Button Grid.Column="1" Grid.Row="2" Content="Copy decoded" MinHeight="50" Margin="5 5 0 5" Click="CopyButton_Click"></Button>
+            </Grid>
 
         </StackPanel>
+
+        <Button Grid.Row="1" Content="Clear" MinHeight="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
+                Command="{Binding Clear}"></Button>
 
     </Grid>
 </mah:MetroWindow>
