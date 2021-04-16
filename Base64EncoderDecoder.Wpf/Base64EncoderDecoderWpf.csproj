@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
     <PackageReference Include="MahApps.Metro" Version="2.4.4" />
   </ItemGroup>
 
